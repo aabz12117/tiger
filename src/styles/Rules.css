@@ -1,0 +1,186 @@
+.rules-page {
+    padding: 60px 20px;
+}
+
+.rules-category {
+    margin-bottom: 80px;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--color-border);
+}
+
+.category-header h2 {
+    font-size: 2rem;
+    color: var(--color-text);
+}
+
+.cat-icon {
+    color: var(--color-primary);
+}
+
+.cat-icon.danger {
+    color: var(--color-danger);
+}
+
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+}
+
+.rules-section {
+    padding: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.section-title.clickable {
+    cursor: pointer;
+    justify-content: space-between;
+    padding: 25px 25px 10px;
+    margin-bottom: 0;
+}
+
+.title-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.section-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rules-section.open .section-content {
+    max-height: 2000px;
+    /* Arbitrary large height for smooth transition */
+    opacity: 1;
+    padding-bottom: 25px;
+}
+
+.rules-list li.rule-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 12px 25px;
+    margin: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.2s;
+}
+
+.rules-list li.rule-item:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.rules-list li.rule-item:last-child {
+    border-bottom: none;
+}
+
+.rules-list li::before {
+    display: none;
+    /* Remove default bullet */
+}
+
+.copy-btn {
+    background: transparent;
+    color: var(--color-text-muted);
+    opacity: 0;
+    transition: all 0.2s;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.rule-item:hover .copy-btn {
+    opacity: 1;
+}
+
+.copy-btn:hover {
+    color: var(--color-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.text-success {
+    color: var(--color-success);
+}
+
+/* Punishments Section */
+.punishments-section {
+    margin-top: 60px;
+}
+
+.punishment-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.p-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    transition: transform 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.p-card:hover {
+    transform: translateY(-5px);
+}
+
+.p-card h3 {
+    margin: 15px 0 10px;
+    font-size: 1.3rem;
+}
+
+.p-card p {
+    color: var(--color-text-muted);
+}
+
+/* Severity Colors */
+.p-card.warning {
+    border-color: rgba(255, 193, 7, 0.3);
+}
+
+.p-card.warning svg,
+.p-card.warning h3 {
+    color: #ffc107;
+}
+
+.p-card.kick {
+    border-color: rgba(255, 87, 34, 0.3);
+}
+
+.p-card.kick svg,
+.p-card.kick h3 {
+    color: #ff5722;
+}
+
+.p-card.ban {
+    border-color: rgba(234, 46, 10, 0.3);
+}
+
+.p-card.ban svg,
+.p-card.ban h3 {
+    color: #ea2e0a;
+}
+
+@media (max-width: 768px) {
+    .rules-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rules-list.two-col {
+        grid-template-columns: 1fr;
+    }
+}

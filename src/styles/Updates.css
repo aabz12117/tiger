@@ -1,0 +1,130 @@
+.updates-page {
+    padding: 60px 20px;
+    min-height: 80vh;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+    background: linear-gradient(135deg, #fff 0%, #a0cfff 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--color-primary), transparent);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 60px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -35px;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 10px var(--color-accent);
+    border: 2px solid var(--color-bg);
+}
+
+.timeline-content {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 25px;
+    transition: transform 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateX(-5px);
+    border-color: var(--color-primary);
+}
+
+.update-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.version-badge {
+    background: var(--color-primary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.update-date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+.timeline-content h2 {
+    color: var(--color-text);
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.changes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.change-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s;
+}
+
+.change-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.change-badge {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    min-width: 60px;
+    text-align: center;
+}
+
+.change-text {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+}
+
+/* Timeline center line adjustment */
+.timeline::before {
+    background: linear-gradient(to bottom, var(--color-accent), transparent);
+    width: 2px;
+}
