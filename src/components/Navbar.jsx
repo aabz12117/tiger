@@ -19,7 +19,7 @@ const Navbar = () => {
         <nav className="navbar">
             <div className="container nav-content">
                 <Link to="/" className="logo">
-                    <img src="/assets/logo.png" alt="Tiger City" />
+                    <img src="assets/logo.png" alt="Tiger City" />
                     <span>تايقر سيتي</span>
                 </Link>
 

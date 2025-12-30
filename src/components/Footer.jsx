@@ -5,7 +5,7 @@ const Footer = () => {
         <footer className="footer">
             <div className="container footer-content">
                 <div className="footer-logo">
-                    <img src="/assets/logo.png" alt="Tiger City" width="50" />
+                    <img src="assets/logo.png" alt="Tiger City" width="50" />
                     <h3>تايقر سيتي</h3>
                     <p>مجتمعك المفضل في عالم روبلوكس</p>
                 </div>

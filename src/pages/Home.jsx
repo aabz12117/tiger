@@ -20,7 +20,7 @@ const Home = () => {
                 <div className="hero-bg-animate"></div>
                 <div className="hero-content container">
                     <div className="hero-text">
-                        <img src="/assets/logo.png" alt="Tiger City Logo" className="hero-logo" />
+                        <img src="assets/logo.png" alt="Tiger City Logo" className="hero-logo" />
                         <h1 className="hero-title">تايقر سيتي</h1>
                         <p className="hero-description">
                             المدينة الأفضل في عالم روبلوكس. استمتع بحياة واقعية، وظائف متعددة،
@@ -54,7 +54,7 @@ const Home = () => {
                             <div className="glow-effect"></div>
                             {/* We can use the logo again or a generate_image later if needed, 
                     but for now a nice CSS placeholder or the logo is fine */}
-                            <img src="/assets/logo.png" alt="Tiger City Preview" className="preview-img" />
+                            <img src="assets/logo.png" alt="Tiger City Preview" className="preview-img" />
                         </div>
                     </div>
                 </div>
