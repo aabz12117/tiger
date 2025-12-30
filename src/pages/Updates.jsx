@@ -16,7 +16,7 @@ const Updates = () => {
             const fetchAvatar = async () => {
                 try {
                     const targetUrl = `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${daily.criminal.userId}&size=150x150&format=Png&isCircular=false`;
-                    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}&disableCache=true`);
+                    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`);
                     const proxyData = await response.json();
                     const data = JSON.parse(proxyData.contents);
 
