@@ -6,6 +6,7 @@ import Updates from './pages/Updates';
 import Rules from './pages/Rules';
 import About from './pages/About';
 import Creators from './pages/Creators';
+import Suggestions from './pages/Suggestions';
 import { useState, useEffect } from 'react';
 import { AvatarProvider } from './context/AvatarContext';
 
@@ -70,6 +71,7 @@ function App() {
               <Route path="/rules" element={<Rules />} />
               <Route path="/about" element={<About />} />
               <Route path="/creators" element={<Creators />} />
+              <Route path="/suggestions" element={<Suggestions />} />
             </Routes>
           </main>
           <Footer />
