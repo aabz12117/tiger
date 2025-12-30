@@ -1,6 +1,7 @@
 import { Play, Activity, Calendar } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import '../styles/Home.css';
+import MostWanted from '../components/MostWanted';
 
 const Home = () => {
     const [playerCount, setPlayerCount] = useState(1240);
@@ -89,6 +90,8 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+            {/* Most Wanted Section */}
+            <MostWanted />
         </div>
     );
 };

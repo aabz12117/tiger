@@ -2,55 +2,55 @@ import { User, Shield, Hammer, Code, PenTool, ExternalLink, MessageCircle, Globe
 import { useState, useEffect } from 'react';
 import '../styles/Creators.css';
 
+const TEAM_MEMBERS = [
+    {
+        name: 'D7ooal',
+        role: 'المالك والمؤسس',
+        roleType: 'owner',
+        userId: '3202017640',
+        icon: <Shield size={24} />,
+        link: 'https://www.roblox.com/users/3202017640/profile',
+        discord: 'https://discord.gg/7a4UHZfUJW',
+        social: null
+    },
+    {
+        name: 'Bodi12012',
+        role: 'كبير البنائين',
+        roleType: 'builder',
+        userId: 3969119603,
+        icon: <Hammer size={24} />,
+        link: 'https://www.roblox.com/ar/users/3969119603/profile',
+        discord: 'https://discord.gg/7a4UHZfUJW',
+        social: 'https://discord.gg/NfNrPvC'
+    },
+    {
+        name: 'abod120120',
+        role: 'مبرمج رئيسي',
+        roleType: 'programmer',
+        userId: '1233849028',
+        icon: <Code size={24} />,
+        link: 'https://www.roblox.com/users/1233849028/profile',
+        discord: 'https://discord.gg/NfNrPvC',
+        social: 'https://discord.gg/NfNrPvC'
+    },
+    {
+        name: 'Sarax1000',
+        role: 'الحلوه ساره',
+        roleType: 'designer',
+        userId: '1934759568',
+        icon: <PenTool size={24} />,
+        link: 'https://www.roblox.com/users/1934759568/profile',
+        discord: 'https://discord.gg/7a4UHZfUJW',
+        social: 'https://discord.gg/7a4UHZfUJW'
+    }
+];
+
 const Creators = () => {
     const [avatars, setAvatars] = useState({});
 
-    const team = [
-        {
-            name: 'D7ooal',
-            role: 'المالك والمؤسس',
-            roleType: 'owner',
-            userId: '3202017640',
-            icon: <Shield size={24} />,
-            link: 'https://www.roblox.com/users/3202017640/profile',
-            discord: 'https://discord.gg/7a4UHZfUJW',
-            social: null
-        },
-        {
-            name: 'Bodi12012',
-            role: 'كبير البنائين',
-            roleType: 'builder',
-            userId: 3969119603,
-            icon: <Hammer size={24} />,
-            link: 'https://www.roblox.com/ar/users/3969119603/profile',
-            discord: 'https://discord.gg/7a4UHZfUJW',
-            social: 'https://discord.gg/NfNrPvC'
-        },
-        {
-            name: 'abod120120',
-            role: 'مبرمج رئيسي',
-            roleType: 'programmer',
-            userId: '1233849028',
-            icon: <Code size={24} />,
-            link: 'https://www.roblox.com/users/1233849028/profile',
-            discord: 'https://discord.gg/NfNrPvC',
-            social: 'https://discord.gg/NfNrPvC'
-        },
-        {
-            name: 'Sarax1000',
-            role: 'الحلوه ساره',
-            roleType: 'designer',
-            userId: '1934759568',
-            icon: <PenTool size={24} />,
-            link: 'https://www.roblox.com/users/1934759568/profile',
-            discord: 'https://discord.gg/7a4UHZfUJW',
-            social: 'https://discord.gg/7a4UHZfUJW'
-        }
-    ];
-
     useEffect(() => {
         const fetchAvatars = async () => {
-            const userIds = team.filter(m => m.userId).map(m => m.userId).join(',');
+            const userIds = TEAM_MEMBERS.filter(m => m.userId).map(m => m.userId).join(',');
             if (!userIds) return;
 
             try {
@@ -90,7 +90,7 @@ const Creators = () => {
             <h1 className="page-title">فريق العمل</h1>
 
             <div className="creators-grid">
-                {team.map((member, index) => (
+                {TEAM_MEMBERS.map((member, index) => (
                     <div key={index} className={`creator-card glass-card ${member.roleType}`}>
                         <div className="avatar-container">
                             {member.userId && avatars[member.userId] ? (
