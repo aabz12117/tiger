@@ -37,14 +37,14 @@ const Creators = () => {
             social: 'https://discord.gg/NfNrPvC'
         },
         {
-            name: 'ArtisticSoul',
-            role: 'مصمم جرافيك',
+            name: 'Sarax1000',
+            role: 'الحلوه ساره',
             roleType: 'designer',
-            userId: null,
+            userId: '1934759568',
             icon: <PenTool size={24} />,
-            link: '#',
+            link: 'https://www.roblox.com/users/1934759568/profile',
             discord: 'https://discord.gg/7a4UHZfUJW',
-            social: null
+            social: 'https://discord.gg/7a4UHZfUJW'
         }
     ];
 
