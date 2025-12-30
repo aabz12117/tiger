@@ -6,8 +6,8 @@ import Updates from './pages/Updates';
 import Rules from './pages/Rules';
 import About from './pages/About';
 import Creators from './pages/Creators';
-
 import { useState, useEffect } from 'react';
+import { AvatarProvider } from './context/AvatarContext';
 
 const Cursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -59,20 +59,22 @@ const Cursor = () => {
 function App() {
   return (
     <Router>
-      <Cursor />
-      <div className="app-container">
-        <Navbar />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/updates" element={<Updates />} />
-            <Route path="/rules" element={<Rules />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/creators" element={<Creators />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+      <AvatarProvider>
+        <Cursor />
+        <div className="app-container">
+          <Navbar />
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/updates" element={<Updates />} />
+              <Route path="/rules" element={<Rules />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/creators" element={<Creators />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </AvatarProvider>
     </Router>
   );
 }

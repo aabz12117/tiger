@@ -45,45 +45,15 @@ const TEAM_MEMBERS = [
     }
 ];
 
+import { useAvatars } from '../context/AvatarContext';
+
 const Creators = () => {
-    const [avatars, setAvatars] = useState({});
+    const { avatars, fetchAvatars } = useAvatars();
 
     useEffect(() => {
-        const fetchAvatars = async () => {
-            const userIds = TEAM_MEMBERS.filter(m => m.userId).map(m => m.userId).join(',');
-            if (!userIds) return;
-
-            try {
-                // Using a proxy or direct call if CORS allows. Roblox API usually has CORS.
-                // If this fails due to CORS in development, we might need a proxy or just fallback.
-                // For now, attempting direct call which might fail in browser.
-                // Alternative: Use a public CORS proxy or just the image redirection URL if it still works.
-                // Let's try the direct image URL which redirects (it's an image src, so no CORS issue for <img> tag usually, 
-                // but the endpoint returns 404 sometimes if not valid).
-
-                // Better approach for reliability without backend: 
-                // Use the known thumbnail CDN pattern if possible, but that hash changes.
-                // We will try the API. If it fails, we fall back to a placeholder.
-
-                const targetUrl = `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userIds}&size=420x420&format=Png&isCircular=false`;
-                const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`);
-                const proxyData = await response.json();
-                const data = JSON.parse(proxyData.contents);
-
-                const avatarMap = {};
-                if (data.data) {
-                    data.data.forEach(item => {
-                        avatarMap[item.targetId] = item.imageUrl;
-                    });
-                    setAvatars(avatarMap);
-                }
-            } catch (error) {
-                console.error("Failed to fetch avatars:", error);
-            }
-        };
-
-        fetchAvatars();
-    }, []);
+        const userIds = TEAM_MEMBERS.filter(m => m.userId).map(m => m.userId);
+        fetchAvatars(userIds);
+    }, [fetchAvatars]);
 
     return (
         <div className="creators-page container fade-in">

@@ -3,33 +3,20 @@ import { CloudSun, Flame, AlertCircle, Car, TrendingUp, ShieldAlert, Newspaper a
 import { getDailyContent } from '../data/dailyContent';
 import { useState, useEffect } from 'react';
 
+import { useAvatars } from '../context/AvatarContext';
+
 const Updates = () => {
     const [content, setContent] = useState(null);
-    const [criminalAvatar, setCriminalAvatar] = useState(null);
+    const { avatars, fetchAvatars } = useAvatars();
 
     useEffect(() => {
         const daily = getDailyContent();
         setContent(daily);
 
-        // Fetch criminal avatar
         if (daily.criminal && daily.criminal.userId) {
-            const fetchAvatar = async () => {
-                try {
-                    const targetUrl = `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${daily.criminal.userId}&size=150x150&format=Png&isCircular=false`;
-                    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`);
-                    const proxyData = await response.json();
-                    const data = JSON.parse(proxyData.contents);
-
-                    if (data.data && data.data[0]) {
-                        setCriminalAvatar(data.data[0].imageUrl);
-                    }
-                } catch (err) {
-                    console.error("Failed to fetch criminal avatar", err);
-                }
-            };
-            fetchAvatar();
+            fetchAvatars(daily.criminal.userId);
         }
-    }, []);
+    }, [fetchAvatars]);
 
     if (!content) return <div className="loading-spinner">جاري تحميل الصحيفة...</div>;
 
@@ -119,9 +106,9 @@ const Updates = () => {
                                 <h4>مجرم اليوم</h4>
                             </div>
 
-                            {criminalAvatar ? (
+                            {avatars[content.criminal.userId] ? (
                                 <div className="wanted-avatar-container">
-                                    <img src={criminalAvatar} alt={content.criminal.name} className="wanted-avatar" />
+                                    <img src={avatars[content.criminal.userId]} alt={content.criminal.name} className="wanted-avatar" />
                                 </div>
                             ) : (
                                 <div className="wanted-placeholder">?</div>

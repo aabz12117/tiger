@@ -1,37 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import '../styles/MostWanted.css';
 import { Skull, AlertTriangle } from 'lucide-react';
-
+import { useAvatars } from '../context/AvatarContext';
 import { WANTED_LIST } from '../data/wantedList';
 
 const MostWanted = () => {
-
-
-    const [avatars, setAvatars] = useState({});
+    const { avatars, fetchAvatars } = useAvatars();
 
     useEffect(() => {
-        const fetchAvatars = async () => {
-            const userIds = WANTED_LIST.map(u => u.userId).join(',');
-            try {
-                const targetUrl = `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userIds}&size=420x420&format=Png&isCircular=false`;
-                const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`);
-                const proxyData = await response.json();
-                const data = JSON.parse(proxyData.contents);
-
-                const map = {};
-                if (data.data) {
-                    data.data.forEach(item => {
-                        map[item.targetId] = item.imageUrl;
-                    });
-                    setAvatars(map);
-                }
-            } catch (err) {
-                console.error("Failed to fetch wanted avatars", err);
-            }
-        };
-
-        fetchAvatars();
-    }, []);
+        const userIds = WANTED_LIST.map(u => u.userId);
+        fetchAvatars(userIds);
+    }, [fetchAvatars]);
 
     return (
         <section className="most-wanted-section container">
