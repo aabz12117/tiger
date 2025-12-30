@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Menu, X, Home, Users, BookOpen, Newspaper, Shield, Info } from 'lucide-react';
 import '../styles/Navbar.css';
 
 const Navbar = () => {
@@ -9,7 +9,7 @@ const Navbar = () => {
 
     const links = [
         { name: 'الرئيسية', path: '/' },
-        { name: 'التحديثات', path: '/updates' },
+        { name: 'صحيفة المدينة', path: '/updates' },
         { name: 'القوانين', path: '/rules' },
         { name: 'عن المدينة', path: '/about' },
         { name: 'صناع العمل', path: '/creators' },
@@ -26,13 +26,24 @@ const Navbar = () => {
                 {/* Desktop Menu */}
                 <div className="nav-links desktop-only">
                     {links.map((link) => (
-                        <Link
-                            key={link.path}
-                            to={link.path}
-                            className={`nav-item ${location.pathname === link.path ? 'active' : ''}`}
-                        >
-                            {link.name}
-                        </Link>
+                        link.path === '/updates' ? (
+                            <NavLink
+                                key={link.path}
+                                to={link.path}
+                                className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+                            >
+                                <Newspaper size={20} />
+                                <span>{link.name}</span>
+                            </NavLink>
+                        ) : (
+                            <Link
+                                key={link.path}
+                                to={link.path}
+                                className={`nav-item ${location.pathname === link.path ? 'active' : ''}`}
+                            >
+                                {link.name}
+                            </Link>
+                        )
                     ))}
                 </div>
 
