@@ -14,7 +14,7 @@ const Creators = () => {
             icon: <Shield size={24} />,
             link: 'https://www.roblox.com/users/3202017640/profile',
             discord: 'https://discord.gg/7a4UHZfUJW',
-            social: 'https://twitter.com/D7ooal'
+            social: null
         },
         {
             name: 'BuilderPro',
@@ -23,8 +23,8 @@ const Creators = () => {
             userId: null,
             icon: <Hammer size={24} />,
             link: '#',
-            discord: 'd7ooal', // Example handle if no link
-            social: '#'
+            discord: 'https://discord.gg/7a4UHZfUJW',
+            social: null
         },
         {
             name: 'abod120120',
@@ -33,8 +33,8 @@ const Creators = () => {
             userId: '1233849028',
             icon: <Code size={24} />,
             link: 'https://www.roblox.com/users/1233849028/profile',
-            discord: 'https://discord.gg/developer',
-            social: '#'
+            discord: 'https://discord.gg/NfNrPvC',
+            social: 'https://discord.gg/NfNrPvC'
         },
         {
             name: 'ArtisticSoul',
@@ -43,8 +43,8 @@ const Creators = () => {
             userId: null,
             icon: <PenTool size={24} />,
             link: '#',
-            discord: 'artistic_soul',
-            social: 'https://behance.net/artisticsoul'
+            discord: 'https://discord.gg/7a4UHZfUJW',
+            social: null
         }
     ];
 
