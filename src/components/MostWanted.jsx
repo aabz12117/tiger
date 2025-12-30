@@ -16,28 +16,27 @@ const MostWanted = () => {
 
     useEffect(() => {
         const fetchAvatars = async () => {
-            const fetchAvatars = async () => {
-                const userIds = WANTED_LIST.map(u => u.userId).join(',');
-                try {
-                    const targetUrl = `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userIds}&size=420x420&format=Png&isCircular=false`;
-                    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`);
-                    const proxyData = await response.json();
-                    const data = JSON.parse(proxyData.contents);
+            const userIds = WANTED_LIST.map(u => u.userId).join(',');
+            try {
+                const targetUrl = `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userIds}&size=420x420&format=Png&isCircular=false`;
+                const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`);
+                const proxyData = await response.json();
+                const data = JSON.parse(proxyData.contents);
 
-                    const map = {};
-                    if (data.data) {
-                        data.data.forEach(item => {
-                            map[item.targetId] = item.imageUrl;
-                        });
-                        setAvatars(map);
-                    }
-                } catch (err) {
-                    console.error("Failed to fetch wanted avatars", err);
+                const map = {};
+                if (data.data) {
+                    data.data.forEach(item => {
+                        map[item.targetId] = item.imageUrl;
+                    });
+                    setAvatars(map);
                 }
-            };
+            } catch (err) {
+                console.error("Failed to fetch wanted avatars", err);
+            }
+        };
 
-            fetchAvatars();
-        }, []);
+        fetchAvatars();
+    }, []);
 
     return (
         <section className="most-wanted-section container">
