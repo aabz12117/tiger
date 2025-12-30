@@ -1,4 +1,4 @@
-import { User, Shield, Hammer, Code, PenTool, ExternalLink } from 'lucide-react';
+import { User, Shield, Hammer, Code, PenTool, ExternalLink, MessageCircle, Globe } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import '../styles/Creators.css';
 
@@ -12,7 +12,9 @@ const Creators = () => {
             roleType: 'owner',
             userId: '3202017640',
             icon: <Shield size={24} />,
-            link: 'https://www.roblox.com/users/3202017640/profile'
+            link: 'https://www.roblox.com/users/3202017640/profile',
+            discord: 'https://discord.gg/7a4UHZfUJW',
+            social: 'https://twitter.com/D7ooal'
         },
         {
             name: 'BuilderPro',
@@ -20,7 +22,9 @@ const Creators = () => {
             roleType: 'builder',
             userId: null,
             icon: <Hammer size={24} />,
-            link: '#'
+            link: '#',
+            discord: 'd7ooal', // Example handle if no link
+            social: '#'
         },
         {
             name: 'abod120120',
@@ -28,7 +32,9 @@ const Creators = () => {
             roleType: 'programmer',
             userId: '1233849028',
             icon: <Code size={24} />,
-            link: 'https://www.roblox.com/users/1233849028/profile'
+            link: 'https://www.roblox.com/users/1233849028/profile',
+            discord: 'https://discord.gg/developer',
+            social: '#'
         },
         {
             name: 'ArtisticSoul',
@@ -36,7 +42,9 @@ const Creators = () => {
             roleType: 'designer',
             userId: null,
             icon: <PenTool size={24} />,
-            link: '#'
+            link: '#',
+            discord: 'artistic_soul',
+            social: 'https://behance.net/artisticsoul'
         }
     ];
 
@@ -105,15 +113,50 @@ const Creators = () => {
                             </div>
                             <h2>{member.name}</h2>
 
-                            <a
-                                href={member.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="profile-link"
-                            >
-                                <span>حساب روبلوكس</span>
-                                <ExternalLink size={14} />
-                            </a>
+                            <div className="social-links-container">
+                                <a
+                                    href={member.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="profile-link roblox"
+                                    title="Roblox Profile"
+                                >
+                                    <ExternalLink size={14} />
+                                    <span>روبلوكس</span>
+                                </a>
+
+                                {member.discord && (
+                                    <a
+                                        href={member.discord.startsWith('http') ? member.discord : '#'}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="profile-link discord"
+                                        title={member.discord.startsWith('http') ? "Discord Server" : `Discord: ${member.discord}`}
+                                        onClick={(e) => {
+                                            if (!member.discord.startsWith('http')) {
+                                                e.preventDefault();
+                                                navigator.clipboard.writeText(member.discord);
+                                                alert(`تم نسخ حساب الديسكورد: ${member.discord}`);
+                                            }
+                                        }}
+                                    >
+                                        <MessageCircle size={14} />
+                                        <span>{member.discord.startsWith('http') ? 'ديسكورد' : 'نسخ ID'}</span>
+                                    </a>
+                                )}
+
+                                {member.social && member.social !== '#' && (
+                                    <a
+                                        href={member.social}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="profile-link web"
+                                        title="Website / Social"
+                                    >
+                                        <Globe size={14} />
+                                    </a>
+                                )}
+                            </div>
                         </div>
                     </div>
                 ))}
