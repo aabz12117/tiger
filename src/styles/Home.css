@@ -168,6 +168,24 @@
     }
 }
 
+.status-indicator.maintenance .dot {
+    background-color: #ff9800;
+    box-shadow: 0 0 15px #ff9800;
+}
+
+.status-indicator.stopped .dot {
+    background-color: #f44336;
+    box-shadow: 0 0 15px #f44336;
+}
+
+.play-btn.disabled-btn {
+    background: #444;
+    color: #888;
+    cursor: not-allowed;
+    box-shadow: none;
+    pointer-events: none;
+}
+
 .visual-card {
     position: relative;
     display: flex;

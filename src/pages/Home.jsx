@@ -1,18 +1,89 @@
-import { Play, Activity, Calendar } from 'lucide-react';
+import { Play, Activity, Calendar, Construction, PauseCircle } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import '../styles/Home.css';
 import MostWanted from '../components/MostWanted';
 
 const Home = () => {
-    const [playerCount, setPlayerCount] = useState(1240);
+    const [playerCount, setPlayerCount] = useState(0);
+    const [mapStatus, setMapStatus] = useState('شغال'); // Default to working
 
-    // Simulate fluctuation in player count
     useEffect(() => {
-        const interval = setInterval(() => {
-            setPlayerCount(prev => prev + Math.floor(Math.random() * 10) - 4);
-        }, 3000);
-        return () => clearInterval(interval);
+        const fetchPlayerCount = async () => {
+            try {
+                // Using RoProxy to bypass CORS for Roblox API
+                const response = await fetch('https://games.roproxy.com/v1/games?universeIds=3229704042');
+                const data = await response.json();
+
+                if (data && data.data && data.data[0]) {
+                    setPlayerCount(data.data[0].playing);
+                }
+            } catch (error) {
+                console.error('Error fetching player count:', error);
+            }
+        };
+
+        const fetchMapStatus = async () => {
+            try {
+                // Fetching from Google Sheet CSV export
+                const response = await fetch('https://docs.google.com/spreadsheets/d/19SoXmZPCKXcmMGjuKHrhQFd4NadkyhLB2tz9hPeZs0Q/gviz/tq?tqx=out:csv');
+                const text = await response.text();
+
+                // Parse CSV to get the last status
+                const lines = text.split('\n').filter(line => line.trim() !== '');
+                if (lines.length > 1) {
+                    const lastLine = lines[lines.length - 1].split(',');
+                    if (lastLine.length > 1) {
+                        const status = lastLine[1].replace(/"/g, '').trim();
+                        setMapStatus(status);
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching map status:', error);
+            }
+        };
+
+        fetchPlayerCount();
+        fetchMapStatus();
+
+        const countInterval = setInterval(fetchPlayerCount, 10000); // Update every 10s
+        const statusInterval = setInterval(fetchMapStatus, 10000); // Look for status every 10s
+
+        return () => {
+            clearInterval(countInterval);
+            clearInterval(statusInterval);
+        };
     }, []);
+
+    const getStatusInfo = () => {
+        switch (mapStatus) {
+            case 'صيانه':
+                return {
+                    label: 'تحت الصيانة',
+                    icon: <Construction size={18} />,
+                    class: 'maintenance',
+                    btnText: 'تحت الصيانة',
+                    btnClass: 'disabled-btn'
+                };
+            case 'موقف':
+                return {
+                    label: 'مغلق مؤقتاً',
+                    icon: <PauseCircle size={18} />,
+                    class: 'stopped',
+                    btnText: 'مغلق',
+                    btnClass: 'disabled-btn'
+                };
+            default:
+                return {
+                    label: 'شغال',
+                    icon: <Activity size={18} />,
+                    class: 'online',
+                    btnText: 'العب الآن',
+                    btnClass: ''
+                };
+        }
+    };
+
+    const statusInfo = getStatusInfo();
 
     return (
         <div className="home-page fade-in">
@@ -30,20 +101,25 @@ const Home = () => {
 
                         <div className="hero-actions">
                             <a
-                                href="https://www.roblox.com/ar/games/8446939114/unnamed"
-                                target="_blank"
+                                href={mapStatus === 'شغال' ? "https://www.roblox.com/ar/games/8446939114/unnamed" : "#"}
+                                target={mapStatus === 'شغال' ? "_blank" : "_self"}
                                 rel="noopener noreferrer"
-                                className="play-btn"
+                                className={`play-btn ${statusInfo.btnClass}`}
+                                onClick={(e) => mapStatus !== 'شغال' && e.preventDefault()}
                             >
-                                <Play fill="currentColor" />
-                                <span>العب الآن</span>
+                                {mapStatus === 'شغال' ? <Play fill="currentColor" /> : statusInfo.icon}
+                                <span>{statusInfo.btnText}</span>
                             </a>
 
-                            <div className="status-indicator online glass-panel">
+                            <div className={`status-indicator ${statusInfo.class} glass-panel`}>
                                 <span className="dot"></span>
                                 <div className="status-text">
-                                    <span className="count">{playerCount.toLocaleString()}</span>
-                                    <span className="label">لاعب حالياً</span>
+                                    <span className="count">
+                                        {mapStatus === 'شغال' ? playerCount.toLocaleString() : statusInfo.label}
+                                    </span>
+                                    <span className="label">
+                                        {mapStatus === 'شغال' ? 'لاعب حالياً' : 'حالة الماب'}
+                                    </span>
                                 </div>
                             </div>
                         </div>
