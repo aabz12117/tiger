@@ -7,6 +7,7 @@ import Rules from './pages/Rules';
 import About from './pages/About';
 import Creators from './pages/Creators';
 import Suggestions from './pages/Suggestions';
+import Secret from './pages/Secret';
 import { useState, useEffect } from 'react';
 import { AvatarProvider } from './context/AvatarContext';
 
@@ -72,6 +73,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/creators" element={<Creators />} />
               <Route path="/suggestions" element={<Suggestions />} />
+              <Route path="/secret" element={<Secret />} />
             </Routes>
           </main>
           <Footer />

@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/MostWanted.css';
 import { Skull, AlertTriangle } from 'lucide-react';
 import { useAvatars } from '../context/AvatarContext';
@@ -6,6 +7,17 @@ import { WANTED_LIST } from '../data/wantedList';
 
 const MostWanted = () => {
     const { avatars, fetchAvatars } = useAvatars();
+    const navigate = useNavigate();
+    const [secretClicks, setSecretClicks] = useState(0);
+
+    const handleSkullClick = () => {
+        const newCount = secretClicks + 1;
+        setSecretClicks(newCount);
+        if (newCount >= 10) {
+            navigate('/secret');
+            setSecretClicks(0); // Reset for next time
+        }
+    };
 
     useEffect(() => {
         const userIds = WANTED_LIST.map(u => u.userId);
@@ -15,7 +27,14 @@ const MostWanted = () => {
     return (
         <section className="most-wanted-section container">
             <div className="section-header centered">
-                <Skull size={32} className="danger-icon" />
+                <Skull
+                    size={32}
+                    className="danger-icon"
+                    onClick={handleSkullClick}
+                    style={{ cursor: 'pointer', transition: 'transform 0.2s ease' }}
+                    onMouseDown={(e) => e.currentTarget.style.transform = 'scale(1.2)'}
+                    onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                />
                 <h2 className="glitch-text" data-text="قائمة المطلوبين">قائمة المطلوبين</h2>
                 <p className="subtitle">للعدالة في تايقر سيتي</p>
             </div>
