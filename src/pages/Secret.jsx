@@ -6,6 +6,7 @@ import '../styles/Secret.css';
 const Secret = () => {
     const navigate = useNavigate();
     const canvasRef = useRef(null);
+    const logsEndRef = useRef(null);
     const [command, setCommand] = useState('');
     const [logs, setLogs] = useState([
         'TIGER_OS v4.0.2 INITIALIZING...',
@@ -13,6 +14,11 @@ const Secret = () => {
         'DECRYPTING DARK WEB GATEWAY...',
         'ACCESS GRANTED. WELCOME, OPERATOR.'
     ]);
+
+    // Auto-scroll logs
+    useEffect(() => {
+        logsEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [logs]);
 
     // Matrix Rain Effect
     useEffect(() => {
@@ -96,6 +102,7 @@ const Secret = () => {
                         {logs.map((log, i) => (
                             <div key={i} className="log-line">{log}</div>
                         ))}
+                        <div ref={logsEndRef} />
                     </div>
 
                     <div className="command-line">
