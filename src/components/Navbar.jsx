@@ -13,6 +13,7 @@ const Navbar = () => {
         { name: 'القوانين', path: '/rules' },
         { name: 'عن المدينة', path: '/about' },
         { name: 'صناع العمل', path: '/creators' },
+        { name: 'حالة الخدمات', path: '/status' },
         { name: 'الاقتراحات', path: '/suggestions' },
     ];
 

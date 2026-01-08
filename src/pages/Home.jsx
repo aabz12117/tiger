@@ -1,5 +1,7 @@
 import { Play, Activity, Calendar, Construction, PauseCircle } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { db } from '../firebase';
+import { doc, onSnapshot } from 'firebase/firestore';
 import '../styles/Home.css';
 import MostWanted from '../components/MostWanted';
 
@@ -10,10 +12,8 @@ const Home = () => {
     useEffect(() => {
         const fetchPlayerCount = async () => {
             try {
-                // Using RoProxy to bypass CORS for Roblox API
                 const response = await fetch('https://games.roproxy.com/v1/games?universeIds=3229704042');
                 const data = await response.json();
-
                 if (data && data.data && data.data[0]) {
                     setPlayerCount(data.data[0].playing);
                 }
@@ -22,35 +22,23 @@ const Home = () => {
             }
         };
 
-        const fetchMapStatus = async () => {
-            try {
-                // Fetching from Google Sheet CSV export
-                const response = await fetch('https://docs.google.com/spreadsheets/d/19SoXmZPCKXcmMGjuKHrhQFd4NadkyhLB2tz9hPeZs0Q/gviz/tq?tqx=out:csv');
-                const text = await response.text();
-
-                // Parse CSV to get the last status
-                const lines = text.split('\n').filter(line => line.trim() !== '');
-                if (lines.length > 1) {
-                    const lastLine = lines[lines.length - 1].split(',');
-                    if (lastLine.length > 1) {
-                        const status = lastLine[1].replace(/"/g, '').trim();
-                        setMapStatus(status);
-                    }
-                }
-            } catch (error) {
-                console.error('Error fetching map status:', error);
+        // Real-time status from Firestore
+        const unsub = onSnapshot(doc(db, "services", "main-game"), (doc) => {
+            if (doc.exists()) {
+                const status = doc.data().status;
+                // Map Firestore status to Arabic strings used in UI
+                if (status === 'online') setMapStatus('شغال');
+                else if (status === 'maintenance') setMapStatus('صيانه');
+                else if (status === 'offline') setMapStatus('موقف');
             }
-        };
+        });
 
         fetchPlayerCount();
-        fetchMapStatus();
-
-        const countInterval = setInterval(fetchPlayerCount, 10000); // Update every 10s
-        const statusInterval = setInterval(fetchMapStatus, 10000); // Look for status every 10s
+        const countInterval = setInterval(fetchPlayerCount, 10000);
 
         return () => {
             clearInterval(countInterval);
-            clearInterval(statusInterval);
+            unsub();
         };
     }, []);
 

@@ -8,6 +8,9 @@ import About from './pages/About';
 import Creators from './pages/Creators';
 import Suggestions from './pages/Suggestions';
 import Secret from './pages/Secret';
+import StatusPage from './pages/StatusPage';
+import Admin from './pages/Admin';
+import StatusBanner from './components/StatusBanner';
 import { useState, useEffect } from 'react';
 import { AvatarProvider } from './context/AvatarContext';
 
@@ -65,6 +68,7 @@ function App() {
         <Cursor />
         <div className="app-container">
           <Navbar />
+          <StatusBanner />
           <main className="main-content">
             <Routes>
               <Route path="/" element={<Home />} />
@@ -74,6 +78,8 @@ function App() {
               <Route path="/creators" element={<Creators />} />
               <Route path="/suggestions" element={<Suggestions />} />
               <Route path="/secret" element={<Secret />} />
+              <Route path="/status" element={<StatusPage />} />
+              <Route path="/admin" element={<Admin />} />
             </Routes>
           </main>
           <Footer />
