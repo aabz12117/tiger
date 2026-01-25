@@ -67,7 +67,7 @@ const Suggestions = () => {
             } else {
                 throw new Error('Failed to send');
             }
-        } catch (error) {
+        } catch {
             setStatus({ type: 'error', message: 'عذراً، حدث خطأ أثناء الإرسال. يرجى المحاولة لاحقاً.' });
         } finally {
             setIsSubmitting(false);

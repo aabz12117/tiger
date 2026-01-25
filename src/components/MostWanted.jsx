@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/MostWanted.css';
 import { Skull, AlertTriangle } from 'lucide-react';
-import { useAvatars } from '../context/AvatarContext';
+import { useAvatars } from '../hooks/useAvatars';
 import { WANTED_LIST } from '../data/wantedList';
 
 const MostWanted = () => {

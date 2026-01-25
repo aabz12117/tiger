@@ -12,7 +12,7 @@ import StatusPage from './pages/StatusPage';
 import Admin from './pages/Admin';
 import StatusBanner from './components/StatusBanner';
 import { useState, useEffect } from 'react';
-import { AvatarProvider } from './context/AvatarContext';
+import { AvatarProvider } from './context/AvatarContextProvider';
 
 const Cursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });

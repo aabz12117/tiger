@@ -3,20 +3,17 @@ import { CloudSun, Flame, AlertCircle, Car, TrendingUp, ShieldAlert, Newspaper a
 import { getDailyContent } from '../data/dailyContent';
 import { useState, useEffect } from 'react';
 
-import { useAvatars } from '../context/AvatarContext';
+import { useAvatars } from '../hooks/useAvatars';
 
 const Updates = () => {
-    const [content, setContent] = useState(null);
+    const [content] = useState(() => getDailyContent());
     const { avatars, fetchAvatars } = useAvatars();
 
     useEffect(() => {
-        const daily = getDailyContent();
-        setContent(daily);
-
-        if (daily.criminal && daily.criminal.userId) {
-            fetchAvatars(daily.criminal.userId);
+        if (content?.criminal?.userId) {
+            fetchAvatars(content.criminal.userId);
         }
-    }, [fetchAvatars]);
+    }, [content, fetchAvatars]);
 
     if (!content) return <div className="loading-spinner">جاري تحميل الصحيفة...</div>;
 

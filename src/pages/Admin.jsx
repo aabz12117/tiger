@@ -66,7 +66,7 @@ const Admin = () => {
         }));
     };
 
-    const saveChanges = async (serviceId, originalData) => {
+    const saveChanges = async (serviceId) => {
         const changes = edits[serviceId];
         if (!changes) return;
 
@@ -199,7 +199,7 @@ const Admin = () => {
                                         <button
                                             className="update-btn flex items-center gap-2"
                                             disabled={!hasChanges}
-                                            onClick={() => saveChanges(service.id, service)}
+                                            onClick={() => saveChanges(service.id)}
                                         >
                                             <Save size={16} /> حفظ التغييرات
                                         </button>

@@ -2,14 +2,14 @@ import { ShieldAlert, AlertTriangle, UserCheck, Gavel, Shield, Siren, Flame, Sku
 import { useState } from 'react';
 import '../styles/Rules.css';
 
-const RuleSection = ({ icon: Icon, title, children, defaultOpen = false }) => {
+const RuleSection = ({ icon: IconComponent, title, children, defaultOpen = false }) => {
     const [isOpen, setIsOpen] = useState(defaultOpen);
 
     return (
         <div className={`rules-section glass-panel ${isOpen ? 'open' : ''}`}>
             <div className="section-title clickable" onClick={() => setIsOpen(!isOpen)}>
                 <div className="title-content">
-                    <Icon className="icon" />
+                    {IconComponent && <IconComponent className="icon" />}
                     <h3>{title}</h3>
                 </div>
                 {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}

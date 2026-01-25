@@ -1,5 +1,5 @@
 import { User, Shield, Hammer, Code, PenTool, ExternalLink, MessageCircle, Globe } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import '../styles/Creators.css';
 
 const TEAM_MEMBERS = [
@@ -45,7 +45,7 @@ const TEAM_MEMBERS = [
     }
 ];
 
-import { useAvatars } from '../context/AvatarContext';
+import { useAvatars } from '../hooks/useAvatars';
 
 const Creators = () => {
     const { avatars, fetchAvatars } = useAvatars();
